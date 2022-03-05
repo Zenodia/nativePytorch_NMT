@@ -1,0 +1,91 @@
+[INFO] 2022-03-05 09:41:56 > Run name : d_model=128-layers_count=1-heads_count=2-pe=True-optimizer=Adam-2022_03_05_09_41_56
+[INFO] 2022-03-05 09:41:56 > {'config': None, 'data_dir': '/workspace/parallel/out/HFout/', 'save_config': 'checkpoints/example_config.json', 'save_checkpoint': 'checkpoints/en2sv.pth', 'save_log': 'logs/example.log', 'device': 'cuda', 'dataset_limit': None, 'print_every': 1, 'save_every': 1, 'vocabulary_size': None, 'positional_encoding': True, 'd_model': 128, 'layers_count': 1, 'heads_count': 2, 'd_ff': 128, 'dropout_prob': 0.1, 'label_smoothing': 0.1, 'optimizer': 'Adam', 'lr': 0.001, 'clip_grads': False, 'batch_size': 64, 'epochs': 500}
+[INFO] 2022-03-05 09:41:56 > Constructing dictionaries...
+[INFO] 2022-03-05 09:42:26 > Source dictionary vocabulary : 13110083 tokens
+[INFO] 2022-03-05 09:42:26 > Target dictionary vocabulary : 18108961 tokens
+[INFO] 2022-03-05 09:42:26 > Building model...
+[INFO] 2022-03-05 09:42:54 > Transformer(
+  (encoder): TransformerEncoder(
+    (embedding): PositionalEncoding(
+      (embbedding): Embedding(13110083, 128, padding_idx=0)
+      (dropout): Dropout(p=0.0, inplace=False)
+    )
+    (encoder_layers): ModuleList(
+      (0): TransformerEncoderLayer(
+        (self_attention_layer): Sublayer(
+          (sublayer): MultiHeadAttention(
+            (query_projection): Linear(in_features=128, out_features=128, bias=True)
+            (key_projection): Linear(in_features=128, out_features=128, bias=True)
+            (value_projection): Linear(in_features=128, out_features=128, bias=True)
+            (final_projection): Linear(in_features=128, out_features=128, bias=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+            (softmax): Softmax(dim=3)
+          )
+          (layer_normalization): LayerNormalization()
+        )
+        (pointwise_feedforward_layer): Sublayer(
+          (sublayer): PointwiseFeedForwardNetwork(
+            (feed_forward): Sequential(
+              (0): Linear(in_features=128, out_features=128, bias=True)
+              (1): Dropout(p=0.1, inplace=False)
+              (2): ReLU()
+              (3): Linear(in_features=128, out_features=128, bias=True)
+              (4): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (layer_normalization): LayerNormalization()
+        )
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+    )
+  )
+  (decoder): TransformerDecoder(
+    (embedding): PositionalEncoding(
+      (embbedding): Embedding(18108961, 128, padding_idx=0)
+      (dropout): Dropout(p=0.0, inplace=False)
+    )
+    (decoder_layers): ModuleList(
+      (0): TransformerDecoderLayer(
+        (self_attention_layer): Sublayer(
+          (sublayer): MultiHeadAttention(
+            (query_projection): Linear(in_features=128, out_features=128, bias=True)
+            (key_projection): Linear(in_features=128, out_features=128, bias=True)
+            (value_projection): Linear(in_features=128, out_features=128, bias=True)
+            (final_projection): Linear(in_features=128, out_features=128, bias=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+            (softmax): Softmax(dim=3)
+          )
+          (layer_normalization): LayerNormalization()
+        )
+        (memory_attention_layer): Sublayer(
+          (sublayer): MultiHeadAttention(
+            (query_projection): Linear(in_features=128, out_features=128, bias=True)
+            (key_projection): Linear(in_features=128, out_features=128, bias=True)
+            (value_projection): Linear(in_features=128, out_features=128, bias=True)
+            (final_projection): Linear(in_features=128, out_features=128, bias=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+            (softmax): Softmax(dim=3)
+          )
+          (layer_normalization): LayerNormalization()
+        )
+        (pointwise_feedforward_layer): Sublayer(
+          (sublayer): PointwiseFeedForwardNetwork(
+            (feed_forward): Sequential(
+              (0): Linear(in_features=128, out_features=128, bias=True)
+              (1): Dropout(p=0.1, inplace=False)
+              (2): ReLU()
+              (3): Linear(in_features=128, out_features=128, bias=True)
+              (4): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (layer_normalization): LayerNormalization()
+        )
+      )
+    )
+    (generator): Linear(in_features=128, out_features=18108961, bias=True)
+  )
+)
+[INFO] 2022-03-05 09:42:54 > Encoder : 1678190208 parameters
+[INFO] 2022-03-05 09:42:54 > Decoder : 2336221857 parameters
+[INFO] 2022-03-05 09:42:54 > Total : 4014412065 parameters
+[INFO] 2022-03-05 09:42:54 > Loading datasets...
